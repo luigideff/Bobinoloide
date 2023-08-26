@@ -70,10 +70,12 @@ namespace Bobinoloide
             try
             {
                 Input input = new Input();
-
-                // Be sure to set your keyboard filter to be able to capture key presses and simulate key presses
-                // KeyboardFilterMode.All captures all events; 'Down' only captures presses for non-special keys; 'Up' only captures releases for non-special keys; 'E0' and 'E1' capture presses/releases for special keys
-                input.KeyboardFilterMode = KeyboardFilterMode.All;
+				var random = new Random();
+                int minValue = intervalTimeInt - 50;
+                int maxValue = intervalTimeInt + 50;
+				// Be sure to set your keyboard filter to be able to capture key presses and simulate key presses
+				// KeyboardFilterMode.All captures all events; 'Down' only captures presses for non-special keys; 'Up' only captures releases for non-special keys; 'E0' and 'E1' capture presses/releases for special keys
+				input.KeyboardFilterMode = KeyboardFilterMode.All;
                 // You can set a MouseFilterMode as well, but you don't need to set a MouseFilterMode to simulate mouse clicks
 
                 // Finally, load the driver
@@ -83,9 +85,12 @@ namespace Bobinoloide
 
                 while (started == true)
                 {
-                    foreach (string key in keysArray)
+					var shuffledArray = keysArray.OrderBy(x => Guid.NewGuid()).ToArray();
+					foreach (string key in shuffledArray)
                     {
-                        if (!IsWindowActive(targetProcess, targetWindowTitle))
+                        intervalTimeInt = random.Next(minValue, maxValue);
+
+						if (!IsWindowActive(targetProcess, targetWindowTitle))
                         {
                             input.SendText(key);
                             Thread.Sleep(intervalTimeInt);
