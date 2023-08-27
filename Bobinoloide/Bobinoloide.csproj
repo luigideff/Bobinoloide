@@ -90,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="6306761.ico" />
-    <Content Include="6civkb.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
